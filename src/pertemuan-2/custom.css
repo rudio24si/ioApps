@@ -1,0 +1,74 @@
+/* Styling untuk keseluruhan halaman */
+body {
+  /* Menggunakan font sistem yang lebih modern */
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+  color: #1a1a1a;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+}
+
+/* Container utama - Efek Glassmorphism */
+.card {
+  max-width: 500px;
+  width: 90%;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.7); /* Transparan */
+  backdrop-filter: blur(20px); /* Efek blur kaca */
+  -webkit-backdrop-filter: blur(20px);
+  padding: 32px;
+  /* HyperOS identik dengan corner radius yang besar */
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+/* Header utama */
+h1 {
+  color: #000;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.5px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Paragraf */
+p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #444;
+  font-weight: 400;
+}
+
+/* Garis pemisah - Lebih halus */
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.05);
+  margin: 20px 0;
+}
+
+/* Greeting / Footer info */
+small {
+  display: block;
+  font-style: normal; /* HyperOS jarang pakai italic untuk info sistem */
+  text-align: center;
+  color: #8a8a8e;
+  font-size: 12px;
+  margin-top: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
