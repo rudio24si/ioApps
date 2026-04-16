@@ -1,85 +1,93 @@
-import { MdDashboard } from "react-icons/md";
+import {
+  MdDashboard,
+  MdOutlineShoppingBag,
+  MdPeopleOutline,
+  MdAdd,
+} from "react-icons/md";
 
 export default function Sidebar() {
   return (
     <div
       id="sidebar"
-      className="flex min-h-screen w-90 flex-col bg-white p-10 shadow-lg"
+      className="flex min-h-screen w-80 flex-col bg-white p-8 border-r border-gray-100 shadow-sm sticky top-0"
     >
-      {/* Logo */}
-      <div id="sidebar-logo" className="flex flex-col">
-        <span
+      {/* Logo Section */}
+      <div id="sidebar-logo" className="px-2 mb-10">
+        <h1
           id="logo-title"
-          className="font-poppins text-[48px] text-gray-900"
+          className="text-4xl font-black tracking-tighter text-gray-900"
         >
-          Sedap{" "}
-          <b id="logo-dot" className="text-hijau">
+          Sedap
+          <span id="logo-dot" className="text-hijau">
             .
-          </b>
-        </span>
-        <span id="logo-subtitle" className="font-semibold text-gray-400">
+          </span>
+        </h1>
+        <p
+          id="logo-subtitle"
+          className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 mt-1"
+        >
           Modern Admin Dashboard
-        </span>
+        </p>
       </div>
 
       {/* List Menu */}
-      <div id="sidebar-menu" className="mt-10">
-        <ul id="menu-list" className="space-y-3">
+      <nav id="sidebar-menu" className="flex-1">
+        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 px-4">
+          Main Menu
+        </p>
+        <ul id="menu-list" className="space-y-2">
+          {/* Active Menu Item */}
           <li>
-            <div
-              id="menu-1"
-              className="hover:text-hijau flex cursor-pointer items-center rounded-xl p-4 font-medium text-gray-600 hover:bg-green-200 hover:font-extrabold"
-            >
-              <MdDashboard className="mr-2 text-xl" />
-              <span>Dashboard</span>
+            <div className="flex items-center space-x-3 rounded-2xl p-4 bg-hijau text-white shadow-lg shadow-hijau/30 cursor-pointer transition-all">
+              <MdDashboard className="text-2xl" />
+              <span className="font-bold">Dashboard</span>
             </div>
           </li>
-          <li>
-            <div
-              id="menu-2"
-              className="hover:text-hijau flex cursor-pointer items-center rounded-xl p-4 font-medium text-gray-600 hover:bg-green-200 hover:font-extrabold"
-            >
-              Orders
-            </div>
-          </li>
-          <li>
-            <div
-              id="menu-3"
-              className="hover:text-hijau flex cursor-pointer items-center rounded-xl p-4 font-medium text-gray-600 hover:bg-green-200 hover:font-extrabold"
-            >
-              Customers
-            </div>
-          </li>
-        </ul>
-      </div>
 
-      {/* Footer */}
-      <div id="sidebar-footer" className="mt-auto">
+          {/* Inactive Menu Items */}
+          {[
+            { name: "Orders", icon: <MdOutlineShoppingBag /> },
+            { name: "Customers", icon: <MdPeopleOutline /> },
+          ].map((item, index) => (
+            <li key={index}>
+              <div className="group flex items-center space-x-3 rounded-2xl p-4 text-gray-500 hover:bg-gray-50 hover:text-hijau cursor-pointer transition-all duration-300">
+                <span className="text-2xl group-hover:scale-110 transition-transform">
+                  {item.icon}
+                </span>
+                <span className="font-medium">{item.name}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* Upgrade/Ads Card: Dibuat lebih modern */}
+      <div id="sidebar-footer" className="mt-auto pt-10">
         <div
           id="footer-card"
-          className="bg-hijau px-4 py-2 rounded-md shadow-lg mb-10 flex items-center"
+          className="relative bg-hijau rounded-3xl p-6 text-white overflow-hidden shadow-xl shadow-hijau/20"
         >
-          <div id="footer-text" className="text-white text-sm">
-            <span>Please organize your menus through button below!</span>
-            <div
-              id="add-menu-button"
-              className="flex justify-center items-center p-2 mt-3 bg-white rounded-md space-x-2"
-            >
-              <span className="text-gray-600 flex items-center">Add Menus</span>
-            </div>
-          </div>
-          <img
-            id="footer-avatar"
-            src="https://avatar.iran.liara.run/public/28"
-            className="w-20 rounded-full"
-          />
+          {/* Aksesori Dekoratif */}
+          <div className="absolute -right-4 -top-4 w-16 h-16 bg-white/10 rounded-full"></div>
+
+          <p className="text-xs font-medium mb-4 relative z-10 leading-relaxed">
+            Please organize your menus through button below!
+          </p>
+
+          <button className="w-full flex justify-center items-center py-2.5 bg-white text-hijau rounded-xl font-bold text-sm hover:bg-gray-50 transition-colors shadow-sm">
+            <MdAdd className="mr-1 text-lg" /> Add Menus
+          </button>
         </div>
-        <span id="footer-brand" className="font-bold text-gray-400">
-          Sedap Restaurant Admin Dashboard
-        </span>
-        <p id="footer-copyright" className="font-light text-gray-400">
-          &copy; 2025 All Right Reserved
-        </p>
+
+        {/* Brand Footer */}
+        <div className="mt-8 px-2">
+          <p className="text-xs font-bold text-gray-800">
+            Sedap Restaurant Admin
+          </p>
+          <p className="text-[10px] text-gray-400 mt-1 font-medium italic">
+            &copy; 2026 All Rights Reserved
+          </p>
+        </div>
       </div>
     </div>
   );

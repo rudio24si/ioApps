@@ -2,97 +2,92 @@ import { FaShoppingCart, FaTruck, FaBan, FaDollarSign } from "react-icons/fa";
 import PageHeader from "../components/PageHeader";
 
 export default function Dashboard() {
+  const stats = [
+    {
+      id: "orders",
+      label: "Total Orders",
+      value: "75",
+      icon: <FaShoppingCart />,
+      color: "bg-hijau",
+      lightColor: "bg-green-50",
+      textColor: "text-green-600",
+    },
+    {
+      id: "delivered",
+      label: "Total Delivered",
+      value: "175",
+      icon: <FaTruck />,
+      color: "bg-blue-500",
+      lightColor: "bg-blue-50",
+      textColor: "text-blue-600",
+    },
+    {
+      id: "canceled",
+      label: "Total Canceled",
+      value: "40",
+      icon: <FaBan />,
+      color: "bg-red-500",
+      lightColor: "bg-red-50",
+      textColor: "text-red-600",
+    },
+    {
+      id: "revenue",
+      label: "Total Revenue",
+      value: "Rp 128rb",
+      icon: <FaDollarSign />,
+      color: "bg-amber-500",
+      lightColor: "bg-amber-50",
+      textColor: "text-amber-600",
+    },
+  ];
+
   return (
-    <div id="dashboard-container">
+    <div id="dashboard-container" className="min-h-screen bg-gray-50/50">
+      {/* Header Halaman */}
       <PageHeader />
+
+      {/* Grid Stats: Responsif & Terstruktur */}
       <div
         id="dashboard-grid"
-        className="p-5 grid sm:grid-cols-2 md:grid-cols-4 gap-4"
+        className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
       >
-        <div id="dashboard-orders" className="flex items-center space-x-5 bg-white rounded-lg shadow-md p-4">
+        {stats.map((item) => (
           <div
-            id="orders-icon"
-            className="bg-hijau rounded-full p-4 text-3xl text-white"
+            key={item.id}
+            className="group flex items-center p-5 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 cursor-pointer"
           >
-            <FaShoppingCart />
-          </div>
-          <div
-            id="orders-info"
-            className="flex items-center space-x-5 bg-white rounded-lg shadow-md p-4"
-          >
-            <span id="orders-count" className="text-2xl font-bold">
-              75
-            </span>
-            <span id="orders-text" className="text-gray-400">
-              Total Orders
-            </span>
-          </div>
-        </div>
+            {/* Wrapper Icon yang lebih estetik */}
+            <div
+              className={`${item.color} text-white p-4 rounded-2xl shadow-lg shadow-current/20 group-hover:scale-110 transition-transform duration-300`}
+            >
+              <span className="text-2xl">{item.icon}</span>
+            </div>
 
-        <div
-          id="dashboard-delivered"
-          className="flex items-center space-x-5 bg-white rounded-lg shadow-md p-4"
-        >
-          <div
-            id="delivered-icon"
-            className="bg-biru rounded-full p-4 text-3xl text-white"
-          >
-            <FaTruck />
+            {/* Konten Teks */}
+            <div className="ml-5">
+              <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">
+                {item.label}
+              </p>
+              <div className="flex items-center space-x-2">
+                <h2 className="text-2xl font-black text-gray-800">
+                  {item.value}
+                </h2>
+                {/* Badge tambahan untuk improvisasi visual */}
+                <span
+                  className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${item.lightColor} ${item.textColor}`}
+                >
+                  +2.5%
+                </span>
+              </div>
+            </div>
           </div>
-          <div
-            id="delivered-info"
-            className="flex items-center space-x-5 bg-white rounded-lg shadow-md p-4"
-          >
-            <span id="delivered-count" className="text-2xl font-bold">
-              175
-            </span>
-            <span id="delivered-text" className="text-gray-400">
-              Total Delivered
-            </span>
-          </div>
-        </div>
+        ))}
+      </div>
 
-        <div
-          id="dashboard-canceled"
-          className="flex items-center space-x-5 bg-white rounded-lg shadow-md p-4"
-        >
-          <div
-            id="canceled-icon"
-            className="bg-merah rounded-full p-4 text-3xl text-white"
-          >
-            <FaBan />
-          </div>
-          <div
-            id="canceled-info"
-            className="flex items-center space-x-5 bg-white rounded-lg shadow-md p-4"
-          >
-            <span id="canceled-count" className="text-2xl font-bold">
-              40
-            </span>
-            <span id="canceled-text" className="text-gray-400">
-              Total Canceled
-            </span>
-          </div>
-        </div>
-
-        <div id="dashboard-revenue" className="flex items-center space-x-5 bg-white rounded-lg shadow-md p-4">
-          <div
-            id="revenue-icon"
-            className="bg-kuning rounded-full p-4 text-3xl text-white"
-          >
-            <FaDollarSign />
-          </div>
-          <div
-            id="revenue-info"
-            className="flex items-center space-x-5 bg-white rounded-lg shadow-md p-4"
-          >
-            <span id="revenue-amount" className="text-2xl font-bold">
-              Rp.128
-            </span>
-            <span id="revenue-text" className="text-gray-400">
-              Total Revenue
-            </span>
-          </div>
+      {/* Placeholder untuk Content Berikutnya (Chart/Tabel) */}
+      <div className="px-6 pb-6">
+        <div className="h-64 bg-white rounded-3xl border border-dashed border-gray-200 flex items-center justify-center text-gray-400 font-medium">
+          Chart or Recent Orders Table Goes Here
         </div>
       </div>
     </div>
