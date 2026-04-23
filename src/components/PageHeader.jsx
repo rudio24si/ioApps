@@ -1,0 +1,50 @@
+import { FaPlus, FaHome, FaChevronRight } from "react-icons/fa";
+
+export default function PageHeader() {
+  return (
+    <div
+      id="pageheader-container"
+      className="flex flex-col md:flex-row md:items-center justify-between p-6 bg-white border-b border-gray-100 shadow-sm"
+    >
+      {/* Bagian Kiri: Judul & Breadcrumb */}
+      <div id="pageheader-left" className="space-y-1">
+        <h1
+          id="page-title"
+          className="text-2xl font-bold text-gray-800 tracking-tight"
+        >
+          Order Management
+        </h1>
+
+        <nav
+          id="breadcrumb-links"
+          className="flex items-center text-sm font-medium"
+        >
+          <div className="flex items-center text-gray-400 hover:text-hijau transition-colors cursor-pointer">
+            <FaHome className="mr-1.5" />
+            <span>Dashboard</span>
+          </div>
+
+          <FaChevronRight className="mx-3 text-[10px] text-gray-300" />
+
+          <span
+            id="breadcrumb-current"
+            className="text-hijau bg-hijau/10 px-2 py-0.5 rounded"
+          >
+            Order List
+          </span>
+        </nav>
+      </div>
+
+      {/* Bagian Kanan: Action Button */}
+      <div id="action-button" className="mt-4 md:mt-0">
+        <button
+          id="add-button"
+          className="group flex items-center bg-hijau hover:bg-opacity-90 text-white px-5 py-2.5 rounded-xl shadow-lg shadow-hijau/20 transition-all duration-300 active:scale-95"
+        >
+          <FaPlus className="mr-2 text-sm group-hover:rotate-90 transition-transform duration-300" />
+          <span className="font-semibold">Create New Order</span>
+        </button>
+      </div>
+    </div>
+  );
+}
