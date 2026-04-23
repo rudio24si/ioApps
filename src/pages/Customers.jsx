@@ -42,6 +42,7 @@ export default function Dashboard() {
   ];
 
   return (
+    
     <div id="dashboard-container" className="min-h-screen bg-gray-50/50">
       {/* Header Halaman */}
       <PageHeader />

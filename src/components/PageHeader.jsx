@@ -1,6 +1,17 @@
 import { FaPlus, FaHome, FaChevronRight } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 export default function PageHeader() {
+  const location = useLocation();
+
+  const pageTitles = {
+    "/" : "Dashboard",
+    "/orders" : "Orders",
+    "/customers" : "Customers"
+  }
+
+  const currentTitle = pageTitles[location.pathname] || "Dashboard";
+
   return (
     <div
       id="pageheader-container"
@@ -12,7 +23,7 @@ export default function PageHeader() {
           id="page-title"
           className="text-2xl font-bold text-gray-800 tracking-tight"
         >
-          Order Management
+          {currentTitle}
         </h1>
 
         <nav
@@ -21,7 +32,9 @@ export default function PageHeader() {
         >
           <div className="flex items-center text-gray-400 hover:text-hijau transition-colors cursor-pointer">
             <FaHome className="mr-1.5" />
-            <span>Dashboard</span>
+            <span>
+              {currentTitle}
+            </span>
           </div>
 
           <FaChevronRight className="mx-3 text-[10px] text-gray-300" />
