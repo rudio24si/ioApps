@@ -1,105 +1,94 @@
+import { NavLink } from "react-router-dom";
 import {
   MdDashboard,
-  MdOutlineShoppingBag,
-  MdPeopleOutline,
-  MdAdd,
+  MdShoppingCart,
+  MdPeople,
+  MdWarning,
+  MdLock,
+  MdBlock,
 } from "react-icons/md";
-import { Link } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+
+const menuUtama = [
+  { to: "/", label: "Dashboard", icon: <MdDashboard className="text-xl" /> },
+  {
+    to: "/orders",
+    label: "Orders",
+    icon: <MdShoppingCart className="text-xl" />,
+  },
+  {
+    to: "/customers",
+    label: "Customers",
+    icon: <MdPeople className="text-xl" />,
+  },
+];
+
+const menuError = [
+  {
+    to: "/error/400",
+    label: "Error 400",
+    icon: <MdWarning className="text-xl" />,
+  },
+  {
+    to: "/error/401",
+    label: "Error 401",
+    icon: <MdLock className="text-xl" />,
+  },
+  {
+    to: "/error/403",
+    label: "Error 403",
+    icon: <MdBlock className="text-xl" />,
+  },
+];
 
 export default function Sidebar() {
+  const linkClass = ({ isActive }) =>
+    `flex items-center space-x-3 px-4 py-2.5 rounded-xl font-medium transition-all duration-200 ${
+      isActive
+        ? "bg-hijau text-white shadow-md shadow-hijau/30"
+        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+    }`;
 
-  const menuClass = ({ isActive }) => {
-    return `flex items-center space-x-3 rounded-2xl p-4 transition-all duration-300 cursor-pointer ${isActive
-      ? "bg-hijau text-white shadow-lg shadow-hijau/30"
-      : "text-gray-500 hover:bg-gray-50 hover:text-hijau"
-      }`;
-  };
-  
   return (
     <div
-      id="sidebar"
-      className="flex min-h-screen w-80 flex-col bg-white p-8 border-r border-gray-100 shadow-sm sticky top-0"
+      id="sidebar-container"
+      className="w-64 min-h-screen bg-white border-r border-gray-100 flex flex-col py-6 px-4 sticky top-0 h-screen"
     >
-      {/* Logo Section */}
-      <div id="sidebar-logo" className="px-2 mb-10">
-        <h1
-          id="logo-title"
-          className="text-4xl font-black tracking-tighter text-gray-900"
-        >
-          Sedap
-          <span id="logo-dot" className="text-hijau">
-            .
-          </span>
-        </h1>
-        <p
-          id="logo-subtitle"
-          className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 mt-1"
-        >
-          Modern Admin Dashboard
-        </p>
+      {/* Logo */}
+      <div id="sidebar-logo" className="flex items-center space-x-2 px-4 mb-8">
+        <div className="w-8 h-8 bg-hijau rounded-lg flex items-center justify-center">
+          <span className="text-white font-black text-sm">IO</span>
+        </div>
+        <span className="text-lg font-black text-gray-900">ioApps</span>
       </div>
 
-      {/* List Menu */}
-      {/* List Menu */}
-      <nav id="sidebar-menu" className="flex-1">
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 px-4">
-          Main Menu
+      {/* Menu Utama */}
+      <div className="mb-6">
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest px-4 mb-3">
+          Menu
         </p>
-        <ul id="menu-list" className="space-y-2">
-          {[
-            { name: "Dashboard", icon: <MdDashboard />, path: "/" },
-            { name: "Orders", icon: <MdOutlineShoppingBag />, path: "/orders" },
-            { name: "Customers", icon: <MdPeopleOutline />, path: "/customers" },
-          ].map((item, index) => (
-            <li key={index}>
-              <NavLink
-                to={item.path}
-                className={menuClass}
-              >
-                {({ isActive }) => (
-                  <>
-                    <span className={`text-2xl ${isActive ? "scale-110" : "group-hover:scale-110"} transition-transform`}>
-                      {item.icon}
-                    </span>
-                    <span className={isActive ? "font-bold" : "font-medium"}>
-                      {item.name}
-                    </span>
-                  </>
-                )}
-              </NavLink>
-            </li>
+        <nav className="flex flex-col space-y-1">
+          {menuUtama.map((item) => (
+            <NavLink key={item.to} to={item.to} end className={linkClass}>
+              {item.icon}
+              <span>{item.label}</span>
+            </NavLink>
           ))}
-        </ul>
-      </nav>
+        </nav>
+      </div>
 
-      {/* Upgrade/Ads Card: Dibuat lebih modern */}
-      <div id="sidebar-footer" className="mt-auto pt-10">
-        <div
-          id="footer-card"
-          className="relative bg-hijau rounded-3xl p-6 text-white overflow-hidden shadow-xl shadow-hijau/20"
-        >
-          {/* Aksesori Dekoratif */}
-          <div className="absolute -right-4 -top-4 w-16 h-16 bg-white/10 rounded-full"></div>
-
-          <p className="text-xs font-medium mb-4 relative z-10 leading-relaxed">
-            Please organize your menus through button below!
-          </p>
-
-          <button className="w-full flex justify-center items-center py-2.5 bg-white text-hijau rounded-xl font-bold text-sm hover:bg-gray-50 transition-colors shadow-sm">
-            <MdAdd className="mr-1 text-lg" /> Add Menus
-          </button>
-        </div>
-
-        {/* Brand Footer */}
-        <div className="mt-8 px-2">
-          <p className="text-xs font-bold text-gray-800">
-            Sedap Restaurant Admin
-          </p>
-          <p className="text-[10px] text-gray-400 mt-1 font-medium italic">
-            &copy; 2026 All Rights Reserved
-          </p>
-        </div>
+      {/* Menu Error Pages */}
+      <div>
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest px-4 mb-3">
+          Error Pages
+        </p>
+        <nav className="flex flex-col space-y-1">
+          {menuError.map((item) => (
+            <NavLink key={item.to} to={item.to} className={linkClass}>
+              {item.icon}
+              <span>{item.label}</span>
+            </NavLink>
+          ))}
+        </nav>
       </div>
     </div>
   );
