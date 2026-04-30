@@ -1,30 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { ImSpinner2 } from "react-icons/im";
 import { BsFillExclamationDiamondFill } from "react-icons/bs";
 
 export default function Login() {
-  /* navigate, state & handleChange*/
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [dataForm, setDataForm] = useState({
-    email: "",
-    password: "",
-  });
+  const [dataForm, setDataForm] = useState({ email: "", password: "" });
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
-    setDataForm({
-      ...dataForm,
-      [name]: value,
-    });
+    setDataForm({ ...dataForm, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
     setError(false);
 
@@ -34,13 +26,10 @@ export default function Login() {
         password: dataForm.password,
       })
       .then((response) => {
-        // Jika status bukan 200, tampilkan pesan error
         if (response.status !== 200) {
           setError(response.data.message);
           return;
         }
-
-        // Redirect ke dashboard jika login sukses
         // navigate("/");
         console.log("Login successful:", response.data);
       })
@@ -51,71 +40,77 @@ export default function Login() {
           setError(err.message || "An unknown error occurred");
         }
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => setLoading(false));
   };
 
-  /* error & loading status */
-  const errorInfo = error ? (
-    <div className="bg-red-200 mb-5 p-5 text-sm font-light text-gray-600 rounded flex items-center">
-      <BsFillExclamationDiamondFill className="text-red-600 me-2 text-lg" />
-      {error}
-    </div>
-  ) : null;
-
-  const loadingInfo = loading ? (
-    <div className="bg-gray-200 mb-5 p-5 text-sm rounded flex items-center">
-      <ImSpinner2 className="me-2 animate-spin" />
-      Mohon Tunggu...
-    </div>
-  ) : null;
-
   return (
-    <div>
-      <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
-        Welcome Back 👋
-      </h2>
-      {errorInfo}
+    <>
+      {/* Welcome */}
+      <p
+        className="text-center italic text-[#f5e6c8]/60 text-[17px] mb-5"
+        style={{ fontFamily: "'Playfair Display', serif" }}
+      >
+        Welcome back, friend ☕
+      </p>
 
-      {loadingInfo}
+      {/* Divider */}
+      <div className="flex items-center gap-3 mb-5">
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c47f2c]/20 to-transparent" />
+        <span className="text-[#c47f2c]/40 text-xs">✦</span>
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c47f2c]/20 to-transparent" />
+      </div>
+
+      {/* Error */}
+      {error && (
+        <div className="flex items-center gap-2 bg-red-900/15 border border-red-500/25 text-red-300 text-sm rounded-xl px-4 py-3 mb-4">
+          <BsFillExclamationDiamondFill className="text-red-400 flex-shrink-0" />
+          {error}
+        </div>
+      )}
+
+      {/* Loading */}
+      {loading && (
+        <div className="flex items-center gap-2 bg-[#c47f2c]/10 border border-[#c47f2c]/20 text-[#f5e6c8]/65 text-sm rounded-xl px-4 py-3 mb-4">
+          <ImSpinner2 className="animate-spin text-[#c47f2c] flex-shrink-0" />
+          Sedang menyeduh... mohon tunggu
+        </div>
+      )}
+
       <form onSubmit={handleSubmit}>
-        <div className="mb-5">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+        <div className="mb-4">
+          <label className="block text-[10px] font-bold tracking-[1.8px] uppercase text-[#c47f2c]/75 mb-2">
             Email Address
           </label>
           <input
             type="text"
-            id="email"
             name="email"
             onChange={handleChange}
-            className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm
-                            placeholder-gray-400"
             placeholder="you@example.com"
+            className="w-full px-4 py-[11px] bg-white/[0.035] border border-[#c47f2c]/18 rounded-xl text-[#f5e6c8] text-sm placeholder-[#f5e6c8]/20 outline-none focus:border-[#c47f2c] focus:bg-white/[0.06] focus:ring-2 focus:ring-[#c47f2c]/10 transition-all"
           />
         </div>
+
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-[10px] font-bold tracking-[1.8px] uppercase text-[#c47f2c]/75 mb-2">
             Password
           </label>
           <input
             type="password"
-            id="password"
             name="password"
             onChange={handleChange}
-            className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm
-                            placeholder-gray-400"
-            placeholder="********"
+            placeholder="••••••••"
+            className="w-full px-4 py-[11px] bg-white/[0.035] border border-[#c47f2c]/18 rounded-xl text-[#f5e6c8] text-sm placeholder-[#f5e6c8]/20 outline-none focus:border-[#c47f2c] focus:bg-white/[0.06] focus:ring-2 focus:ring-[#c47f2c]/10 transition-all"
           />
         </div>
+
         <button
           type="submit"
-          className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4
-                        rounded-lg transition duration-300"
+          disabled={loading}
+          className="w-full py-3 bg-gradient-to-r from-[#c47f2c] to-[#9a5e18] text-[#1a0a00] font-bold text-[13px] tracking-[2px] uppercase rounded-xl hover:shadow-[0_10px_28px_rgba(196,127,44,0.35)] hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-55 disabled:cursor-not-allowed"
         >
-          Login
+          Sign In
         </button>
       </form>
-    </div>
+    </>
   );
 }
