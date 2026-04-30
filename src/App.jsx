@@ -1,23 +1,28 @@
+import React, { Suspense } from "react";
 import "./assets/tailwind.css";
-import Sidebar from "./layouts/Sidebar";
-import Header from "./layouts/Header";
-import Dashboard from "./pages/Dashboard";
-import Orders from "./pages/Orders";
-import Customers from "./pages/Customers";
-import NotFound from "./pages/NotFound";
-import Error400 from "./pages/Error400";
-import Error401 from "./pages/Error401";
-import Error403 from "./pages/Error403";
+const Sidebar = React.lazy(() => import("./components/Sidebar"));
+const Header = React.lazy(() => import("./components/Header"));
+const Dashboard = React.lazy(() => import("./pages/Dashboard"));
+const Orders = React.lazy(() => import("./pages/Orders"));
+const Customers = React.lazy(() => import("./pages/Customers"));
+const Error400 = React.lazy(() => import("./pages/Error400"));
+const Error401 = React.lazy(() => import("./pages/Error401"));
+const Error403 = React.lazy(() => import("./pages/Error403"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+const MainLayout = React.lazy(() => import("./layouts/MainLayout"));
+const AuthLayout = React.lazy(() => import("./layouts/AuthLayout"));
+const Login = React.lazy(() => import("./pages/auth/Login"));
+const Register = React.lazy(() => import("./pages/auth/Register"));
+const Forgot = React.lazy(() => import("./pages/auth/Forgot"));
 import { Routes, Route } from "react-router-dom";
+import Loading from "./components/Loading";
 
 function App() {
   return (
-    <div id="app-container" className="bg-gray-100 min-h-screen flex">
-      <div id="layout-wrapper" className="flex flex-row flex-1">
-        <Sidebar />
-        <div id="main-content" className="flex-1 p-4">
-          <Header />
-          <Routes>
+    <div>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route element={<MainLayout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/customers" element={<Customers />} />
@@ -25,9 +30,14 @@ function App() {
             <Route path="/error/401" element={<Error401 />} />
             <Route path="/error/403" element={<Error403 />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </div>
+          </Route>
+          <Route element={<AuthLayout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot" element={<Forgot />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </div>
   );
 }
