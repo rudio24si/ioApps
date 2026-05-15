@@ -11,6 +11,11 @@ import {
 const menuUtama = [
   { to: "/", label: "Dashboard", icon: <MdDashboard className="text-xl" /> },
   {
+    to: "/products",
+    label: "Products",
+    icon: <MdShoppingCart className="text-xl" />,
+  },
+  {
     to: "/orders",
     label: "Orders",
     icon: <MdShoppingCart className="text-xl" />,
